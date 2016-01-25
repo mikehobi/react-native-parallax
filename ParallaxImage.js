@@ -11,6 +11,7 @@ var {
   Animated,
   StyleSheet,
   Dimensions,
+  ScrollView,
   TouchableHighlight,
 } = React;
 
@@ -19,6 +20,7 @@ var WINDOW_HEIGHT = Dimensions.get('window').height;
 var ParallaxImage = React.createClass({
   propTypes: {
     onPress:        React.PropTypes.func,
+    onScroll:       React.PropTypes.func,
     scrollY:        React.PropTypes.object,
     parallaxFactor: React.PropTypes.number,
     imageStyle:     Image.propTypes.style,
@@ -70,6 +72,7 @@ var ParallaxImage = React.createClass({
     var { offset, width, height } = this.state;
     var {
       onPress,
+      onScroll,
       scrollY,
       parallaxFactor,
       style,
@@ -89,7 +92,7 @@ var ParallaxImage = React.createClass({
         {
           translateY:   scrollY.interpolate({
             inputRange:   [offset - height, offset + WINDOW_HEIGHT + height],
-            outputRange:  [-parallaxPadding, parallaxPadding]
+            outputRange:  [-parallaxPadding, parallaxPadding * 1.25]
           }),
           extrapolate:  'clamp',
         },
@@ -122,6 +125,12 @@ var ParallaxImage = React.createClass({
         <TouchableHighlight ref={component => this._touchable = component} onPress={onPress}>
           {content}
         </TouchableHighlight>
+      );
+    } else if(onScroll) {
+      return (
+        <ScrollView horizontal={true} directionalLockEnabled={true} onScroll={onScroll}>
+          {content}
+        </ScrollView>
       );
     }
     return content;
