@@ -75,7 +75,7 @@ var ParallaxImage = React.createClass({
     var {
       onPress,
       onScrollBeginDrag,
-      onMomentumScrollEnd
+      onMomentumScrollEnd,
       scrollY,
       parallaxFactor,
       style,
