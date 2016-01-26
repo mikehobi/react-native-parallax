@@ -74,6 +74,7 @@ var ParallaxImage = React.createClass({
     var { offset, width, height } = this.state;
     var {
       onPress,
+      scrollable,
       onScrollBeginDrag,
       onMomentumScrollEnd,
       scrollY,
