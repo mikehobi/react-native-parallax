@@ -19,12 +19,14 @@ var WINDOW_HEIGHT = Dimensions.get('window').height;
 
 var ParallaxImage = React.createClass({
   propTypes: {
-    onPress:        React.PropTypes.func,
-    onScroll:       React.PropTypes.func,
-    scrollY:        React.PropTypes.object,
-    parallaxFactor: React.PropTypes.number,
-    imageStyle:     Image.propTypes.style,
-    overlayStyle:   View.propTypes.style,
+    onPress:             React.PropTypes.func,
+    scrollable:          React.PropTypes.bool,
+    onScrollBeginDrag:   React.PropTypes.func,
+    onMomentumScrollEnd: React.PropTypes.func,
+    scrollY:             React.PropTypes.object,
+    parallaxFactor:      React.PropTypes.number,
+    imageStyle:          Image.propTypes.style,
+    overlayStyle:        View.propTypes.style,
   },
 
   getDefaultProps: function() {
@@ -72,7 +74,8 @@ var ParallaxImage = React.createClass({
     var { offset, width, height } = this.state;
     var {
       onPress,
-      onScroll,
+      onScrollBeginDrag,
+      onMomentumScrollEnd
       scrollY,
       parallaxFactor,
       style,
@@ -128,7 +131,7 @@ var ParallaxImage = React.createClass({
       );
     } else if(onScroll) {
       return (
-        <ScrollView horizontal={true} directionalLockEnabled={true} onScroll={onScroll}>
+        <ScrollView horizontal={true} directionalLockEnabled={true} onScrollBeginDrag={onScrollBeginDrag} onMomentumScrollEnd={onScrollBeginDrag}>
           {content}
         </ScrollView>
       );
