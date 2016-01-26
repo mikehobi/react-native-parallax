@@ -129,7 +129,7 @@ var ParallaxImage = React.createClass({
           {content}
         </TouchableHighlight>
       );
-    } else if(onScroll) {
+    } else if(scrollable) {
       return (
         <ScrollView horizontal={true} directionalLockEnabled={true} onScrollBeginDrag={onScrollBeginDrag} onMomentumScrollEnd={onScrollBeginDrag}>
           {content}
